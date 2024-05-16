@@ -1,0 +1,15 @@
+connect gonzalo05op/gonzalo
+insert into gonzalo05op.t01_memory_areas values( 3, sysdate, (select 
+bytes/1024/1024 from v$sgainfo where name = 'Redo Buffers'), (select 
+bytes/1024/1024 from v$sgainfo where name = 'Buffer Cache Size'), 
+(select bytes/1024/1024 from v$sgainfo where name = 'Shared Pool Size'), 
+(select bytes/1024/1024 from v$sgainfo where name = 'Large Pool Size'), 
+(select bytes/1024/1024 from v$sgainfo where name = 'Java Pool Size'), 
+(select trunc(((select sum(value) from v$sga)-(select current_size from 
+v$sga_d$ (select trunc(((select sum(current_size) from 
+v$sga_dynamic_components) +(selec$ (select trunc((select sum(bytes) from 
+v$sgainfo where name not in ('Granule Siz$ (select 
+trunc(value/1024/1024,2) memoria_pga_1 from v$pgastat where name ='aggr$ 
+(select trunc(current_size/1024/1024,2) memoria_pga_2 from 
+v$sga_dynamic_free_m$ (select value/1024/1024 from v$pgastat where value 
+>= (select max(value)from v$$ ) /
