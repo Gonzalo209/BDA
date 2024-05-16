@@ -1,0 +1,3 @@
+select s2.value from gv$sysstat s2
+where s2.name = 'db_block_gets_from_cache'
+/

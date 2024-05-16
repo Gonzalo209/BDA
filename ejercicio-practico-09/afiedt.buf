@@ -1,0 +1,6 @@
+select lower(sys_context('userenv','current_user')
+||'@'
+||sys_context('userenv','db_name'))
+as prompt_name
+from dual
+/

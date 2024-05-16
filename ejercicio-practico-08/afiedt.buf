@@ -1,0 +1,15 @@
+declare
+v_orden_compra gonzalo08.test_orden_compra%rowtype;
+v_query varchar2(100);
+begin
+v_query := 'select * from gonzalo08.test_orden_compra where id = :ph_id';
+for i in 1..50000 loop
+begin
+execute immediate v_query using i;
+exception
+when no_data_found then
+null;
+end;
+end loop;
+end;
+/

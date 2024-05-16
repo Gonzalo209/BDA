@@ -1,0 +1,38 @@
+#!/bin/bash
+
+echo "Creando directorio disk-images"
+mkdir /unam-bda/disk-images
+
+echo "Cambiando al directorio disk-images y cambiando permisos"
+cd /unam-bda/disk-images
+chmod 755 /disk-images
+
+echo "Creando loop devices"
+dd if=/dev/zero of=disk1.img bs=100M count=10
+dd if=/dev/zero of=disk2.img bs=100M count=10
+dd if=/dev/zero of=disk3.img bs=100M count=10
+
+echo "Comprobando la creacion de archivo"
+du -sh disk*.img
+
+echo "Asociando loop devices a su archivo"
+losetup -fP disk1.img
+losetup -fP disk2.img
+losetup -fP disk3.img
+
+echo "Confirmando la creacion de los 3 loop devices"
+losetup -a
+
+echo "Empleando el formato de sistema de archivo"
+mkfs.ext4 disk1.img
+mkfs.ext4 disk2.img
+mkfs.ext4 disk3.img
+
+echo "Creando los directorios donde seran montados los dispositivos"
+mkdir /unam-bda/d01
+mkdir /unam-bda/d02
+mkdir /unam-bda/d03
+
+ls -l /unam-bda
+
+
